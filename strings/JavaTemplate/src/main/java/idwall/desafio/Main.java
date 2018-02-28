@@ -24,11 +24,25 @@ public class Main {
 			break;
 		case 2:
 			text = args[0];
-			limit = Integer.parseInt(args[1]); // TODO: Try catch to Cast a String to an Integer value
+			try {
+				limit = Integer.parseInt(args[1]); // TODO: Try catch to Cast a String to an Integer value
+			} catch (NumberFormatException e) {
+				System.out.println(
+						"\nHouve um problema ao converter um dado do tipo String para Integer.\nFavor verificar se o número passado para a variável 'limit' corresponde a um número.\nRodando o programa com o limit padrão de: "
+								+ DEFAULT_LIMIT + "\n");
+				System.out.println("=========================");
+			}
 			break;
 		case 3:
 			text = args[0];
-			limit = Integer.parseInt(args[1]);
+			try {
+				limit = Integer.parseInt(args[1]); // TODO: Try catch to Cast a String to an Integer value
+			} catch (NumberFormatException e) {
+				System.out.println(
+						"\nHouve um problema ao converter um dado do tipo String para Integer.\nFavor verificar se o número passado para a variável 'limit' corresponde a um número.\nRodando o programa com o limit padrão de: "
+								+ DEFAULT_LIMIT + "\n");
+				System.out.println("=========================");
+			}
 			justify = Boolean.parseBoolean(args[2]);
 			break;
 		}
@@ -42,7 +56,7 @@ public class Main {
 
 		// Run IdwallFormatter
 		final StringFormatter sf = new IdwallFormatter();
-		String outputText = sf.format(text, limit);
+		String outputText = sf.format(text, limit, justify);
 
 		// Print output text
 		System.out.println("Output: ");

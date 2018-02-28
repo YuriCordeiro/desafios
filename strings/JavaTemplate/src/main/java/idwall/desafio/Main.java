@@ -25,7 +25,7 @@ public class Main {
 		case 2:
 			text = args[0];
 			try {
-				limit = Integer.parseInt(args[1]); // TODO: Try catch to Cast a String to an Integer value
+				limit = Integer.parseInt(args[1]);
 			} catch (NumberFormatException e) {
 				System.out.println(
 						"\nHouve um problema ao converter um dado do tipo String para Integer.\nFavor verificar se o número passado para a variável 'limit' corresponde a um número.\nRodando o programa com o limit padrão de: "
@@ -36,7 +36,7 @@ public class Main {
 		case 3:
 			text = args[0];
 			try {
-				limit = Integer.parseInt(args[1]); // TODO: Try catch to Cast a String to an Integer value
+				limit = Integer.parseInt(args[1]);
 			} catch (NumberFormatException e) {
 				System.out.println(
 						"\nHouve um problema ao converter um dado do tipo String para Integer.\nFavor verificar se o número passado para a variável 'limit' corresponde a um número.\nRodando o programa com o limit padrão de: "

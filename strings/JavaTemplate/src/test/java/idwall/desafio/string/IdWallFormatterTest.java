@@ -20,7 +20,7 @@ public class IdWallFormatterTest {
 	/**
 	 * Should return TRUE for each line that contains less or equal characters than
 	 * <code>DEFAULT_LIMIT</code> per line. </br>
-	 * It tests the non-justifyed text
+	 * It tests the non-justified text
 	 */
 	@Test
 	public void testFormat() {

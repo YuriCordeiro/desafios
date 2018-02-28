@@ -8,7 +8,6 @@ import org.junit.Test;
  * Test class responsible for methods of the class IdwallFormatter.java
  * 
  * @author YuriC
- *
  */
 public class IdWallFormatterTest {
 
@@ -17,6 +16,8 @@ public class IdWallFormatterTest {
 			+ "And God said, \"Let there be light,\" and there was light. God saw that the light was good, and he separated the light from the darkness. God called the light \"day,\" and the darkness he called \"night.\" And there was evening, and there was morning - the first day.";
 	private static final Integer DEFAULT_LIMIT = 40;
 
+	private StringFormatter stringFormatter;
+
 	/**
 	 * Should return TRUE for each line that contains less or equal characters than
 	 * <code>DEFAULT_LIMIT</code> per line. </br>
@@ -24,8 +25,7 @@ public class IdWallFormatterTest {
 	 */
 	@Test
 	public void testFormat() {
-		StringFormatter sf = new IdwallFormatter();
-		String lines[] = sf.format(DEFAULT_INPUT_TEXT, DEFAULT_LIMIT, true).split("\n");
+		String lines[] = getStringFormatter().format(DEFAULT_INPUT_TEXT, DEFAULT_LIMIT, true).split("\n");
 
 		for (String line : lines) {
 			assertTrue(line.length() <= DEFAULT_LIMIT);
@@ -34,12 +34,20 @@ public class IdWallFormatterTest {
 
 	@Test
 	public void testFormatNotJustify() {
-		StringFormatter sf = new IdwallFormatter();
-		String lines[] = sf.format(DEFAULT_INPUT_TEXT, DEFAULT_LIMIT, false).split("\n");
+		String lines[] = getStringFormatter().format(DEFAULT_INPUT_TEXT, DEFAULT_LIMIT, false).split("\n");
 
 		for (String line : lines) {
 			assertTrue(line.length() <= DEFAULT_LIMIT);
 		}
+	}
+
+	/**
+	 * Returns a new instance of IdwallFormatter class
+	 * 
+	 * @return
+	 */
+	public StringFormatter getStringFormatter() {
+		return this.stringFormatter = new IdwallFormatter();
 	}
 
 }

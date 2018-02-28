@@ -82,7 +82,6 @@ public class IdwallFormatter extends StringFormatter {
 
 				// Apply spaces to the actual line
 				String[] lineWordsVector = line.split(" ");
-				// int countWords = words.length;
 				lineWordsVector = applySpaces(lineWordsVector, leftingSpaces);
 
 				for (String palavra : lineWordsVector) {
@@ -117,14 +116,14 @@ public class IdwallFormatter extends StringFormatter {
 
 			for (int i = 0; i < wordsCount - 1; i++) {
 				String words = lineWordsVector[i];
-				words = words + " ";
+				words += " ";
 				lineWordsVector[i] = words;
 			}
 
 			while (filledSpaces < leftingSpaces) {
 				for (int i = iniPosition; i < wordsCount - 1; i = i + 2) {
 					String words = lineWordsVector[i];
-					words = words + " ";
+					words += " ";
 					lineWordsVector[i] = words;
 					filledSpaces++;
 					if (filledSpaces == leftingSpaces) {

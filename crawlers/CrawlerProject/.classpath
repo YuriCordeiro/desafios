@@ -25,5 +25,6 @@
 	<classpathentry kind="lib" path="C:/Users/YuriC/Downloads/selenium-java-3.9.1/libs/httpcore-4.4.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/YuriC/Downloads/selenium-java-3.9.1/libs/okhttp-3.9.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/YuriC/Downloads/selenium-java-3.9.1/libs/okio-1.13.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
 
-import br.com.idwall.desafio.Main;
+import br.com.idwall.desafio.FindSubredditThreads;
 import br.com.idwall.desafio.model.SubredditThread;
 import br.com.idwall.desafio.service.SubredditThreadService;
 
@@ -67,7 +67,7 @@ public class SubredditThreadServiceImplTest {
 	 * Opera Driver Configuration and System Initialization
 	 */
 	public void ini() {
-		ClassLoader classLoader = new Main().getClass().getClassLoader();
+		ClassLoader classLoader = new FindSubredditThreads().getClass().getClassLoader();
 		File file = new File(classLoader.getResource(OPERA_DRIVER).getFile());
 		OperaOptions options = new OperaOptions();
 		options.setBinary(new File("C:\\Program Files (x86)\\Opera\\launcher.exe"));

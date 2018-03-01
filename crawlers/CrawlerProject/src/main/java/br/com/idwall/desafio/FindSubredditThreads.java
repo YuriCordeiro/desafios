@@ -11,7 +11,7 @@ package br.com.idwall.desafio;
 //
 //import br.com.idwall.desafio.model.SubredditThread;
 
-public class Main {
+public class FindSubredditThreads {
 
 	// private static final String OPERA_DRIVER = "operadriver.exe";
 	// private static final StringBuilder BASE_URL = new

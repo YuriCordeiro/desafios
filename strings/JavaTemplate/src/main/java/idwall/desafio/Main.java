@@ -6,7 +6,7 @@ import idwall.desafio.string.StringFormatter;
 /**
  * Created by Rodrigo Catão Araujo on 06/02/2018.
  */
-public class Main {
+public class Main { // TODO: Create a README.MD to this project
 
 	private static final String DEFAULT_INPUT_TEXT = "In the beginning God created the heavens and the earth. Now the earth was formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters.\n"
 			+ "\n"
@@ -44,6 +44,9 @@ public class Main {
 				System.out.println("=========================");
 			}
 			justify = Boolean.parseBoolean(args[2]);
+			break;
+
+		default:
 			break;
 		}
 

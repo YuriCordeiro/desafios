@@ -16,6 +16,7 @@ public class IdWallFormatterTest {
 			+ "And God said, \"Let there be light,\" and there was light. God saw that the light was good, and he separated the light from the darkness. God called the light \"day,\" and the darkness he called \"night.\" And there was evening, and there was morning - the first day.";
 	private static final Integer DEFAULT_LIMIT = 40;
 
+	@SuppressWarnings("unused")
 	private StringFormatter stringFormatter;
 
 	/**
@@ -33,7 +34,7 @@ public class IdWallFormatterTest {
 	}
 
 	@Test
-	public void testFormatNotJustify() {
+	public void testFormatNotJustified() {
 		String lines[] = getStringFormatter().format(DEFAULT_INPUT_TEXT, DEFAULT_LIMIT, false).split("\n");
 
 		for (String line : lines) {

@@ -27,8 +27,12 @@ public class FindSubredditThreadsTelegram {
 	private static Map<String, List<SubredditThread>> subredditThreadsHash;
 
 	public static Map<String, List<SubredditThread>> run(String[] subreddits) {
+
 		if (subreddits != null) {
-			init();
+			init(); // Initialize headless HtmlUnit driver
+
+			subredditThreadsHash = new HashMap<>();
+
 			for (String subreddit : subreddits) {
 				findSubredditThreadsInformations(subreddit);
 			}
@@ -58,7 +62,6 @@ public class FindSubredditThreadsTelegram {
 
 		if (webElementsThreadsList != null) {
 			threadsList = new ArrayList<SubredditThread>();
-			subredditThreadsHash = new HashMap<>();
 			for (WebElement thingClassWebElement : webElementsThreadsList) {
 				if (!subredditThreadService.isPromotedThread(thingClassWebElement)) { // We don't wanna promoted threads
 
@@ -84,6 +87,8 @@ public class FindSubredditThreadsTelegram {
 
 		if (threadsList.size() > 0) {
 			subredditThreadsHash.put(subreddit, threadsList);
+		} else {
+			subredditThreadsHash.put(subreddit, new ArrayList<>());
 		}
 		return subredditThreadsHash;
 	}

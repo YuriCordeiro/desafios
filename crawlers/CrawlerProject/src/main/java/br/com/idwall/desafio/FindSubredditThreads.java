@@ -1,10 +1,7 @@
 package br.com.idwall.desafio;
 
-//import java.io.FileInputStream;
-//import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-//import java.util.Properties;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -20,16 +17,21 @@ public class FindSubredditThreads {
 	private static final String BASE_URL = "http://www.reddit.com/r/";
 	private static final String TOP_BASE_URL = "/top";
 	private static final Integer MINIMUN_UP_VOTES = 5000;
-	private static String[] subredditParameters;
+	private static String[] subredditParameters = null;
 	private static SubredditThreadService subredditThreadService;
 	private static HtmlUnitDriver driver;
 
 	public static void main(String[] args) {
 
-		if (args.length >= 1) {
-			subredditParameters = args.toString().split(";");
-		} else {
-			System.out.println("You must give the parameters separated by ';'.." + "\nStart the program again!");
+		try {
+			if (args[0] != null) {
+				subredditParameters = args[0].toString().split(";");
+			} else {
+				System.out
+						.println("You must give the parameters separated by ';'" + ". Try starting the program again!");
+			}
+		} catch (Exception e) {
+			System.out.println("Something goes wrong: " + e);
 		}
 
 		init();
@@ -75,34 +77,28 @@ public class FindSubredditThreads {
 			}
 		}
 
-		System.out.println(
-				"\n\n---------------------------------------------------------------------------------------------------------------------------------------");
-		System.out.println(
-				"----------------------------------------------------- SHOWING MOST POPULAR(5k+ UpVotes) THREADS FOR SUBREDDIT => "
-						+ subreddit.toUpperCase());
-		for (SubredditThread threadItem : threadsList) {
+		if (threadsList.size() > 0) {
+			System.out.println(
+					"\n\n---------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println(
+					"----------------------------------------------------- SHOWING MOST POPULAR(5k+ UpVotes) THREADS FOR SUBREDDIT => "
+							+ subreddit.toUpperCase());
+			for (SubredditThread threadItem : threadsList) {
+				System.out.println(
+						"----------------------------------------------------------------------------------------------------------------------------------------");
+				System.out.println("\tTitle: " + threadItem.getTitle());
+				System.out.println("\tUpvotes: " + threadItem.getUpVotes());
+				System.out.println("\tThread Link: " + threadItem.getThreadLink());
+				System.out.println("\tComments Link: " + threadItem.getCommentsLink());
+			}
+
+			System.out.println(
+					"---------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("------------------------------------------------------------------ ENDING OPERATION");
 			System.out.println(
 					"----------------------------------------------------------------------------------------------------------------------------------------");
-			System.out.println("\tTitle: " + threadItem.getTitle());
-			System.out.println("\tUpvotes: " + threadItem.getUpVotes());
-			System.out.println("\tThread Link: " + threadItem.getThreadLink());
-			System.out.println("\tComments Link: " + threadItem.getCommentsLink());
 		}
-
-		System.out.println(
-				"---------------------------------------------------------------------------------------------------------------------------------------");
-		System.out.println("------------------------------------------------------------------ ENDING OPERATION");
-		System.out.println(
-				"----------------------------------------------------------------------------------------------------------------------------------------");
 	}
-
-	// public static Properties getProp() throws IOException {
-	// Properties props = new Properties();
-	// FileInputStream file = new FileInputStream("./properties/config.properties");
-	// props.load(file);
-	// return props;
-	//
-	// }
 
 	/**
 	 * Init the headless unit driver
@@ -110,6 +106,7 @@ public class FindSubredditThreads {
 	private static void init() {
 		driver = new HtmlUnitDriver(BrowserVersion.CHROME);
 		subredditThreadService = new SubredditThreadServiceImpl();
+		System.getProperty("file.encoding", "UTF-8");
 	}
 
 }

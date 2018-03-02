@@ -8,7 +8,7 @@ package br.com.idwall.desafio.telegram.enums;
  */
 public enum CommandEnum {
 
-	START("/Start"), HELP("/Help"), NADA_PRA_FAZER("/NadaPraFazer");
+	START("/Start"), HELP("/Help"), NADA_PRA_FAZER("/NadaPraFazer"), COMMANDS("/Commands");
 
 	private final String command;
 

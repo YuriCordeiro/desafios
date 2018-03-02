@@ -3,7 +3,7 @@ package br.com.idwall.desafio.model;
 import java.io.Serializable;
 
 /**
- * TODO: <strong>JAVADOC</strong>
+ * Object represents a Subreddit thread
  * 
  * @author YuriC
  *
@@ -11,13 +11,27 @@ import java.io.Serializable;
 public class SubredditThread implements Serializable {
 
 	private static final long serialVersionUID = -3061013267373175129L;
-	
+
 	private String subreddit;
 	private String title;
 	private Integer upVotes;
 	private String threadLink;
 	private String commentsLink;
 
+	/**
+	 * Constructor using all fields
+	 * 
+	 * @param subreddit
+	 *            it represents a subforum
+	 * @param title
+	 *            thread's title
+	 * @param upVotes
+	 *            how many likes thread has
+	 * @param threadLink
+	 *            thread's link
+	 * @param commentsLink
+	 *            thread's comments link
+	 */
 	public SubredditThread(String subreddit, String title, Integer upVotes, String threadLink, String commentsLink) {
 		super();
 		this.subreddit = subreddit;
@@ -27,6 +41,9 @@ public class SubredditThread implements Serializable {
 		this.commentsLink = commentsLink;
 	}
 
+	/////////////////////////////////
+	// Getters andSsetters
+	/////////////////////////////////
 	public String getSubreddit() {
 		return subreddit;
 	}

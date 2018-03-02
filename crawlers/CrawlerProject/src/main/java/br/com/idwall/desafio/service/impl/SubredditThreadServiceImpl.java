@@ -6,6 +6,12 @@ import org.openqa.selenium.WebElement;
 import br.com.idwall.desafio.model.SubredditThread;
 import br.com.idwall.desafio.service.SubredditThreadService;
 
+/**
+ * Implementation class of interface {@link SubredditThreadService}
+ * 
+ * @author Yuri Cordeiro
+ *
+ */
 public class SubredditThreadServiceImpl implements SubredditThreadService {
 
 	@Override
@@ -18,10 +24,7 @@ public class SubredditThreadServiceImpl implements SubredditThreadService {
 	public String findThreadTitle(WebElement threadElement) {
 
 		try {
-			WebElement topMatterClass = getTopMatterWebElementClass(threadElement);
-			return topMatterClass.findElement(By.className("may-blank")).getText(); // Contains the thread
-																					// title
-
+			return getTopMatterWebElementClass(threadElement).findElement(By.className("may-blank")).getText();
 		} catch (Exception e) {
 			System.out.println(
 					"Something goes wrong when trying to find the classes: .entry > .top-matter > .may-blank\nMaybe the HTML of this page has benn changed.");
@@ -45,9 +48,8 @@ public class SubredditThreadServiceImpl implements SubredditThreadService {
 	public int findThreadUpVoted(WebElement threadElement) {
 
 		try {
-			WebElement midcolWebElement = threadElement.findElement(By.className("midcol"));
-			WebElement unvotedWebElement = midcolWebElement.findElement(By.className("unvoted"));
-			String upvotes = unvotedWebElement.getAttribute("title").toString();
+			String upvotes = threadElement.findElement(By.className("midcol")).findElement(By.className("unvoted"))
+					.getAttribute("title").toString();
 			if (upvotes != null && upvotes.matches("[0-9].*")) {
 				return Integer.valueOf(upvotes);
 			}
@@ -58,16 +60,10 @@ public class SubredditThreadServiceImpl implements SubredditThreadService {
 		return 0;
 	}
 
-	/**
-	 * Should validate if a thread is promoted or not
-	 * 
-	 * @return <code>true</code> if it's promoted and <code>false</code> if it's
-	 *         not.
-	 */
 	@Override
 	public boolean isPromotedThread(WebElement threadElement) {
-		WebElement topMatterClass = getTopMatterWebElementClass(threadElement);
-		WebElement flatListButtonsClass = topMatterClass.findElement(By.className("flat-list"));
+		WebElement flatListButtonsClass = getTopMatterWebElementClass(threadElement)
+				.findElement(By.className("flat-list"));
 		try {
 			if (flatListButtonsClass.findElement(By.className("promoted-tag")) != null)
 				return true;
@@ -80,15 +76,18 @@ public class SubredditThreadServiceImpl implements SubredditThreadService {
 
 	@Override
 	public String findThreadCommentsLink(WebElement threadElement) {
-		WebElement topMatterClass = getTopMatterWebElementClass(threadElement);
-		WebElement flatListButtonsClass = topMatterClass.findElement(By.className("flat-list"));
-		WebElement firstClassWebElement = flatListButtonsClass.findElement(By.className("first"));
-		return firstClassWebElement.findElement(By.tagName("a")).getAttribute("href");
+		return getTopMatterWebElementClass(threadElement).findElement(By.className("flat-list"))
+				.findElement(By.className("first")).findElement(By.tagName("a")).getAttribute("href");
 	}
 
+	/**
+	 * Shortcut to top-matter web element class
+	 * 
+	 * @param threadElement
+	 * @return WebElement top-matter (a div with class name 'top-matter')
+	 */
 	private WebElement getTopMatterWebElementClass(WebElement threadElement) {
-		WebElement entryClass = threadElement.findElement(By.className("entry"));
-		return entryClass.findElement(By.className("top-matter"));
+		return threadElement.findElement(By.className("entry")).findElement(By.className("top-matter"));
 	}
 
 }

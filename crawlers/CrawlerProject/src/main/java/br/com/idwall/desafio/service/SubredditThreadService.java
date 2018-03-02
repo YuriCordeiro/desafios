@@ -7,56 +7,65 @@ import br.com.idwall.desafio.model.SubredditThread;
 /**
  * Service interface responsible for {@link SubredditThread} data
  * 
- * @author YuriC
+ * @author Yuri Cordeiro
  *
  */
 public interface SubredditThreadService {
 
 	/**
-	 * TODO: <strong>JAVADOC</strong>
+	 * Method returns a new {@link SubredditThread} Object filled with a thread
+	 * information given by <a href="http://www.reddit.com">Reddit's Web-site</a>
 	 * 
-	 * @author YuriC
-	 *
+	 * @param threadElement
+	 *            The 'thing' class web element
+	 * @param subreddit
+	 *            it represents a sub-forum
+	 * @return {@link SubredditThread}
 	 */
 	public SubredditThread findSubredditThreadInformations(WebElement threadElement, String subreddit);
 
 	/**
-	 * TODO: <strong>JAVADOC</strong>
+	 * Returns a Thread title
 	 * 
-	 * @author YuriC
-	 *
+	 * @param threadElement
+	 *            The 'thing' class web element
+	 * @return title
 	 */
 	public String findThreadTitle(WebElement threadElement);
 
 	/**
-	 * TODO: <strong>JAVADOC</strong>
+	 * Return how many upvotes a thread has
 	 * 
-	 * @author YuriC
-	 *
+	 * @param threadElement
+	 *            The 'thing' class web element
+	 * @return upvotes of a thread
 	 */
 	public int findThreadUpVoted(WebElement threadElement);
 
 	/**
-	 * TODO: <strong>JAVADOC</strong>
+	 * Returns if a thread is promoted or not
 	 * 
-	 * @author YuriC
-	 *
+	 * @param threadElement
+	 *            The 'thing' class web element
+	 * @return <b>true</b> if a thread is promoted, <b>false</b> if not
 	 */
 	public boolean isPromotedThread(WebElement threadElement);
 
 	/**
-	 * TODO: <strong>JAVADOC</strong>
+	 * Returns thread's link
 	 * 
-	 * @author YuriC
-	 *
+	 * @param threadElement
+	 *            The 'thing' class web element
+	 * @return thread's link
 	 */
 	public String findThreadLink(WebElement threadElement);
 
 	/**
-	 * TODO: <strong>JAVADOC</strong>
+	 * Returns thread's comments link
 	 * 
-	 * @author YuriC
-	 *
+	 * @param threadElement
+	 *            The 'thing' class web element
+	 * @return thread's comments link
 	 */
 	public String findThreadCommentsLink(WebElement threadElement);
 

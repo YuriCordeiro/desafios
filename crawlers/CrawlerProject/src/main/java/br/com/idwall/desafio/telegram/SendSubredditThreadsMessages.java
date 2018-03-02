@@ -3,9 +3,10 @@ package br.com.idwall.desafio.telegram;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.MissingResourceException;
 import java.util.Properties;
 
 import org.telegram.telegrambots.api.methods.send.SendMessage;
@@ -21,8 +22,8 @@ public class SendSubredditThreadsMessages extends TelegramLongPollingBot {
 	/**
 	 * can be found at properties file
 	 */
-	private static final String BOT_TOKEN = "BOT_TOKEN";
-	private static final String MINIMUN_UPVOTES = "MINIMUN_UPVOTE";
+	private static final String BOT_TOKEN = "bot.token";
+	private static final String MINIMUN_UPVOTES_KEY = "param.minimun_upvotes";
 
 	@Override
 	public void onUpdateReceived(Update update) {
@@ -32,15 +33,13 @@ public class SendSubredditThreadsMessages extends TelegramLongPollingBot {
 															// passed in <code>.setText<code> method of the
 															// <code>SendMessage</code> object
 
+		// If is a command
 		if (isCommandMessage(receivedMessage)) {
 			if (receivedMessage.toLowerCase().equals(CommandEnum.START.getCommand().toLowerCase())) {
-				sbBotMessage.append("Hello, " + update.getMessage().getFrom().getFirstName()
-						+ ". It's your first time here? Let me help you! (:");
-				sbBotMessage.append(
-						"\n\nYou can use the following commands at this time: \n\n*/Help* - If you are needing help.\n\n*/NadaPraFazer cats;dogs;brazil* - I gonna search for the threads with *"
-								+ getProp().getProperty(MINIMUN_UPVOTES)
-								+ "+* upvotes for the subreddits you told me (*cats*, *dogs* and *brazil*)\nYou can try another popular subreddits too like *askreddit* and *worldnews*, by example. (_IMPORTANT: Remeber to give me the subreddits splitted by \";\" like the example given_)");
-				sbBotMessage.append("\n\nAre you ready? Let's begin!");
+				sbBotMessage.append(getBundleMessage("intro_msg.start_message",
+						new Object[] { update.getMessage().getFrom().getFirstName() }));
+				sbBotMessage.append(getBundleMessage("intro_msg.commands_message",
+						new Object[] { getBundleMessage(MINIMUN_UPVOTES_KEY) }));
 			} else if (receivedMessage.toLowerCase().equals(CommandEnum.HELP.getCommand().toLowerCase())) {
 				sbBotMessage.append(
 						"Você digitou /Help. Na verdade este comando não faz nada.. ><' \nSe estiver precisando de alguma ajuda digite /start para ler a introdução do bot de novo (:");
@@ -49,27 +48,27 @@ public class SendSubredditThreadsMessages extends TelegramLongPollingBot {
 				Map<String, List<SubredditThread>> resultMap = FindSubredditThreadsTelegram
 						.run(receivedMessage.replace(CommandEnum.NADA_PRA_FAZER.getCommand(), "").trim().split(";"));
 
-				for (Entry<String, List<SubredditThread>> entry : resultMap.entrySet()) {
+				resultMap.entrySet().stream().forEach(entry -> {
 					sbBotMessage.append(
-							"\n=> Top threads for *" + entry.getKey().toUpperCase() + "* subreddit on reddit.com");
+							"\n~~> Top threads for *" + entry.getKey().toUpperCase() + "* subreddit on reddit.com");
 					if (entry.getValue().size() > 0) {
 						entry.getValue().stream()
-								.forEach(threadObject -> sbBotMessage.append("\n\n  *Thread Title*: "
-										+ threadObject.getTitle() + "\n  *Thread Upvotes*: " + threadObject.getUpVotes()
-										+ "\n  *Thread Link*: [" + threadObject.getThreadLink() + "]"
-										+ "\n  *Comments Link*: [" + threadObject.getCommentsLink() + "]\n\n"));
+								.forEach(threadObject -> sbBotMessage.append("\n\n*Thread Title*: "
+										+ threadObject.getTitle() + "\n*Thread Upvotes*: _" + threadObject.getUpVotes()
+										+ "_" + "\n*Thread Link*: [" + threadObject.getThreadLink() + "]"
+										+ "\n*Comments Link*: [" + threadObject.getCommentsLink() + "]\n\n"));
 					} else {
-						sbBotMessage.append("\n\n\n_== NO THREADS WITH " + getProp().getProperty(MINIMUN_UPVOTES)
-								+ "+ UVPOTES WERE FOUND FOR THIS SUBREDDIT==_\n\n\n");
+						sbBotMessage.append("\n\n\n_== No thread with " + getBundleMessage(MINIMUN_UPVOTES_KEY)
+								+ "+ upvotes were found for this subreddit==_\n\n\n");
 					}
-					sbBotMessage.append("** END OF *" + entry.getKey().toUpperCase() + "* subreddit threads\n\n\n");
-				}
+					sbBotMessage.append("|..:: End of *" + entry.getKey().toUpperCase() + "* subreddit threads\n\n\n");
+				});
 
 			} else {
 				sbBotMessage.append("\"[" + receivedMessage
 						+ "]\" command doesn't exist. :/ \nTry typping the follow one: \n/NadaPraFazer askreddit;worldnews;cats");
 			}
-		} else {
+		} else { // If is a simple text
 			sbBotMessage.append("Sorry " + update.getMessage().getFrom().getFirstName()
 					+ ", I can't understand what are you saying yet.. I'm a BOT in BETA Version (for tests only). \n\n If you wanna test me, please type: /help");
 		}
@@ -86,13 +85,12 @@ public class SendSubredditThreadsMessages extends TelegramLongPollingBot {
 
 	@Override
 	public String getBotUsername() {
-		// return "y1test_bot";
-		return "They call me 'experience'.. I don't know why :(";
+		return "Guess they call me bot'something else'.. I don't remember :/";
 	}
 
 	@Override
 	public String getBotToken() {
-		return getProp().get(BOT_TOKEN).toString();
+		return getBundleMessage(BOT_TOKEN);
 	}
 
 	public boolean isCommandMessage(String message) {
@@ -103,20 +101,36 @@ public class SendSubredditThreadsMessages extends TelegramLongPollingBot {
 		}
 	}
 
-	public Properties getProp() {
+	private static Properties getProp() {
 		Properties props = new Properties();
 		FileInputStream file;
 		try {
 			file = new FileInputStream("./properties/config.properties");
 			props.load(file);
 		} catch (FileNotFoundException e) {
-			System.err.println("PROPERTIES FILE NOT FOUND");
+			System.err.println("Config properties file not found");
 			e.printStackTrace();
 		} catch (IOException e) {
-			System.err.println("PROPERTIES FILE NOT FOUND");
+			System.err.println("Config properties file not found");
 			e.printStackTrace();
 		}
 		return props;
-
 	}
+
+	public static String getBundleMessage(String key) {
+		try {
+			return getProp().getProperty(key);
+		} catch (MissingResourceException e) {
+			return '!' + key + '!';
+		}
+	}
+
+	public static String getBundleMessage(String key, Object... params) {
+		try {
+			return MessageFormat.format(getProp().getProperty(key), params);
+		} catch (MissingResourceException e) {
+			return '!' + key + '!';
+		}
+	}
+
 }

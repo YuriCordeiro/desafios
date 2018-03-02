@@ -24,22 +24,26 @@ public class FindSubredditThreads {
 	public static void main(String[] args) {
 
 		try {
-			if (args[0] != null) {
-				subredditParameters = args[0].toString().split(";");
-			} else {
-				System.out
-						.println("You must give the parameters separated by ';'" + ". Try starting the program again!");
+			subredditParameters = args[0].toString().split(";");
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println(
+					"You must give the parameters separated by \";\". Try this example: \"askreddit;worldnews;cats\" \n"
+							+ e);
+		} catch (NullPointerException ex) {
+			System.out.println(
+					"You must give the parameters separated by ';'. Example: \"askreddit;worldnews;cats\" \n" + ex);
+		} catch (Exception exc) {
+			System.out.println("Something goes wrong: " + exc);
+		}
+
+		if (subredditParameters != null) {
+			init();
+			for (String subreddit : subredditParameters) {
+				findSubredditThreadsInformations(subreddit);
 			}
-		} catch (Exception e) {
-			System.out.println("Something goes wrong: " + e);
-		}
 
-		init();
-		for (String subreddit : subredditParameters) {
-			findSubredditThreadsInformations(subreddit);
+			driver.quit();
 		}
-
-		driver.quit();
 	}
 
 	private static void findSubredditThreadsInformations(String subreddit) {
@@ -67,7 +71,7 @@ public class FindSubredditThreads {
 					SubredditThread subredditThread = subredditThreadService
 							.findSubredditThreadInformations(thingClassWebElement, subreddit);
 
-					if (subredditThread.getUpVotes() > MINIMUN_UP_VOTES) {
+					if (subredditThread.getUpVotes() >= MINIMUN_UP_VOTES) {
 						threadsList.add(subredditThread);
 					} else {
 						break;

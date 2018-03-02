@@ -1,9 +1,11 @@
-package br.com.idwall.desafio;
+package br.com.idwall.desafio.telegram;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.openqa.selenium.By;
@@ -16,39 +18,28 @@ import br.com.idwall.desafio.model.SubredditThread;
 import br.com.idwall.desafio.service.SubredditThreadService;
 import br.com.idwall.desafio.service.impl.SubredditThreadServiceImpl;
 
-public class FindSubredditThreads {
+public class FindSubredditThreadsTelegram {
+
 	private static final String BASE_URL = "http://www.reddit.com/r/";
 	private static final String TOP_BASE_URL = "/top";
-	private static String[] subredditParameters = null;
 	private static SubredditThreadService subredditThreadService;
 	private static HtmlUnitDriver driver;
+	private static Map<String, List<SubredditThread>> subredditThreadsHash;
 
-	public static void main(String[] args) {
-
-		try {
-			subredditParameters = args[0].toString().split(";");
-		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println(
-					"You must give the parameters separated by \";\". Try this example: \"askreddit;worldnews;cats\" \n"
-							+ e);
-		} catch (NullPointerException ex) {
-			System.out.println(
-					"You must give the parameters separated by ';'. Example: \"askreddit;worldnews;cats\" \n" + ex);
-		} catch (Exception exc) {
-			System.out.println("Something goes wrong: " + exc);
-		}
-
-		if (subredditParameters != null) {
+	public static Map<String, List<SubredditThread>> run(String[] subreddits) {
+		if (subreddits != null) {
 			init();
-			for (String subreddit : subredditParameters) {
+			for (String subreddit : subreddits) {
 				findSubredditThreadsInformations(subreddit);
 			}
 
 			driver.quit();
 		}
+
+		return subredditThreadsHash;
 	}
 
-	public static void findSubredditThreadsInformations(String subreddit) {
+	public static Map<String, List<SubredditThread>> findSubredditThreadsInformations(String subreddit) {
 
 		try {
 			driver.get(BASE_URL.concat(subreddit).concat(TOP_BASE_URL).toString());
@@ -67,6 +58,7 @@ public class FindSubredditThreads {
 
 		if (webElementsThreadsList != null) {
 			threadsList = new ArrayList<SubredditThread>();
+			subredditThreadsHash = new HashMap<>();
 			for (WebElement thingClassWebElement : webElementsThreadsList) {
 				if (!subredditThreadService.isPromotedThread(thingClassWebElement)) { // We don't wanna promoted threads
 
@@ -91,26 +83,9 @@ public class FindSubredditThreads {
 		}
 
 		if (threadsList.size() > 0) {
-			System.out.println(
-					"\n\n---------------------------------------------------------------------------------------------------------------------------------------");
-			System.out.println(
-					"----------------------------------------------------- SHOWING MOST POPULAR(5k+ UpVotes) THREADS FOR SUBREDDIT => "
-							+ subreddit.toUpperCase());
-			for (SubredditThread threadItem : threadsList) {
-				System.out.println(
-						"----------------------------------------------------------------------------------------------------------------------------------------");
-				System.out.println("\tTitle: " + threadItem.getTitle());
-				System.out.println("\tUpvotes: " + threadItem.getUpVotes());
-				System.out.println("\tThread Link: " + threadItem.getThreadLink());
-				System.out.println("\tComments Link: " + threadItem.getCommentsLink());
-			}
-
-			System.out.println(
-					"---------------------------------------------------------------------------------------------------------------------------------------");
-			System.out.println("------------------------------------------------------------------ ENDING OPERATION");
-			System.out.println(
-					"----------------------------------------------------------------------------------------------------------------------------------------");
+			subredditThreadsHash.put(subreddit, threadsList);
 		}
+		return subredditThreadsHash;
 	}
 
 	/**

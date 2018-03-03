@@ -1,12 +1,12 @@
 package br.com.idwall.desafio.cli.application;
 
-import br.com.idwall.desafio.cli.CliApplication;
+import br.com.idwall.desafio.cli.FindSubredditThreadCli;
 import br.com.idwall.desafio.utils.PropertiesUtil;
 
 public class Main {
 
 	public static void main(String[] args) {
-		CliApplication cliApplication = new CliApplication();
+		FindSubredditThreadCli cliApplication = new FindSubredditThreadCli();
 		System.getProperty("file.encoding", "UTF-8");
 		if (args != null && args.length == 1) {
 			System.out.println("Initializing program...\n\n");

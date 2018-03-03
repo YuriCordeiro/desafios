@@ -12,7 +12,7 @@ import br.com.idwall.desafio.model.SubredditThread;
 import br.com.idwall.desafio.utils.PropertiesUtil;
 
 /**
- * Class responsible for {@link CliApplication} unit tests
+ * Class responsible for {@link FindSubredditThreadCli} unit tests
  * 
  * @author YuriC
  *
@@ -24,7 +24,7 @@ public class CliApplicationTest {
 	 */
 	@Test
 	public void testCliApplication() {
-		CliApplication cli = new CliApplication();
+		FindSubredditThreadCli cli = new FindSubredditThreadCli();
 		assertNotNull(cli);
 		assertNotNull(cli.getDriver());
 		assertNotNull(cli.getSubredditThreadService());
@@ -40,7 +40,7 @@ public class CliApplicationTest {
 	public void testFindSubredditThreadsInformations() {
 		System.out.println(
 				"\n\nRunning this test may prints some DefaultCssErrorHandler errors, but don't worry, everything's under control by here!\n\n");
-		CliApplication cli = new CliApplication();
+		FindSubredditThreadCli cli = new FindSubredditThreadCli();
 		Map<String, List<SubredditThread>> threadHash = cli.findSubredditThreadsInformations("askreddit");
 		threadHash.entrySet().stream().forEach(entry -> entry.getValue().forEach(thread -> assertTrue(
 				thread.getUpVotes() >= Integer.valueOf(PropertiesUtil.getBundleMessage("param.minimum_upvotes")))));

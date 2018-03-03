@@ -1,13 +1,7 @@
 package br.com.idwall.desafio.telegram.bot;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
-import java.util.MissingResourceException;
-import java.util.Properties;
 
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
@@ -16,15 +10,20 @@ import org.telegram.telegrambots.exceptions.TelegramApiException;
 
 import br.com.idwall.desafio.model.SubredditThread;
 import br.com.idwall.desafio.telegram.enums.CommandEnum;
+import br.com.idwall.desafio.utils.PropertiesUtil;
 
-public class SendSubredditThreadsMessages extends TelegramLongPollingBot {
+public class SendSubredditThreadMessage extends TelegramLongPollingBot {
 
 	/**
 	 * Constants can be found at properties file
 	 */
 	private static final String BOT_TOKEN = "bot.token";
 	private static final String MINIMUN_UPVOTES_KEY = "param.minimun_upvotes";
-	private FindSubredditThreadsTelegram findSubredditThreadsTelegram = new FindSubredditThreadsTelegram();
+	private FindSubredditThreadTelegram findSubredditThreadsTelegram;
+
+	public SendSubredditThreadMessage() {
+		this.findSubredditThreadsTelegram = new FindSubredditThreadTelegram();
+	}
 
 	@Override
 	public void onUpdateReceived(Update update) {
@@ -34,13 +33,13 @@ public class SendSubredditThreadsMessages extends TelegramLongPollingBot {
 															// passed in <code>.setText<code> method of the
 															// <code>SendMessage</code> object
 
-		// If is a command
+		// If it's a command
 		if (isCommandMessage(receivedMessage)) {
 			if (receivedMessage.toLowerCase().equals(CommandEnum.START.getCommand().toLowerCase())) {
-				sbBotMessage.append(getBundleMessage("intro_msg.start_message",
+				sbBotMessage.append(PropertiesUtil.getBundleMessage("intro_msg.start_message",
 						new Object[] { update.getMessage().getFrom().getFirstName() }));
-				sbBotMessage.append(getBundleMessage("intro_msg.commands_message",
-						new Object[] { getBundleMessage(MINIMUN_UPVOTES_KEY) }));
+				sbBotMessage.append(PropertiesUtil.getBundleMessage("intro_msg.commands_message",
+						new Object[] { PropertiesUtil.getBundleMessage(MINIMUN_UPVOTES_KEY) }));
 			} else if (receivedMessage.toLowerCase().equals(CommandEnum.HELP.getCommand().toLowerCase())) {
 				sbBotMessage.append(
 						"Você digitou /Help. Na verdade este comando não faz nada.. ><' \nSe estiver precisando de alguma ajuda digite /start para ler a introdução do bot de novo (:");
@@ -59,8 +58,9 @@ public class SendSubredditThreadsMessages extends TelegramLongPollingBot {
 										+ "_" + "\n*Thread Link*: [" + threadObject.getThreadLink() + "]"
 										+ "\n*Comments Link*: [" + threadObject.getCommentsLink() + "]\n\n"));
 					} else {
-						sbBotMessage.append("\n\n\n_== No thread with " + getBundleMessage(MINIMUN_UPVOTES_KEY)
-								+ "+ upvotes were found for this subreddit==_\n\n\n");
+						sbBotMessage.append(
+								"\n\n\n_== No thread with " + PropertiesUtil.getBundleMessage(MINIMUN_UPVOTES_KEY)
+										+ "+ upvotes were found for this subreddit==_\n\n\n");
 					}
 					sbBotMessage.append("|..:: End of *" + entry.getKey().toUpperCase() + "* subreddit threads\n\n\n");
 				});
@@ -91,46 +91,20 @@ public class SendSubredditThreadsMessages extends TelegramLongPollingBot {
 
 	@Override
 	public String getBotToken() {
-		return getBundleMessage(BOT_TOKEN);
+		return PropertiesUtil.getBundleMessage(BOT_TOKEN);
 	}
 
+	/**
+	 * Should verify if a received message is a command
+	 * 
+	 * @param message
+	 * @return
+	 */
 	public boolean isCommandMessage(String message) {
 		if (message != null && message.startsWith("/")) {
 			return true;
 		} else {
 			return false;
-		}
-	}
-
-	private static Properties getProp() {
-		Properties props = new Properties();
-		FileInputStream file;
-		try {
-			file = new FileInputStream("./properties/config.properties");
-			props.load(file);
-		} catch (FileNotFoundException e) {
-			System.err.println("Config properties file not found");
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.err.println("Config properties file not found");
-			e.printStackTrace();
-		}
-		return props;
-	}
-
-	public static String getBundleMessage(String key) {
-		try {
-			return getProp().getProperty(key);
-		} catch (MissingResourceException e) {
-			return '!' + key + '!';
-		}
-	}
-
-	public static String getBundleMessage(String key, Object... params) {
-		try {
-			return MessageFormat.format(getProp().getProperty(key), params);
-		} catch (MissingResourceException e) {
-			return '!' + key + '!';
 		}
 	}
 

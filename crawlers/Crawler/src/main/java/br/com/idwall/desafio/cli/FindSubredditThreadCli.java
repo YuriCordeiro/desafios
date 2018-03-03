@@ -17,13 +17,13 @@ import br.com.idwall.desafio.service.impl.SubredditThreadServiceImpl;
 import br.com.idwall.desafio.utils.PropertiesUtil;
 
 /**
- * Simple CLI class application that provides the top threads of subreddits on
- * <a href="http://www.reddit.com">Reddit's Website</a>
+ * Simple CLI class that should provides the top threads of subreddits on
+ * <a href="http://www.reddit.com">Reddit's Web-site</a>
  * 
  * @author Yuri Cordeiro
  *
  */
-public class CliApplication {
+public class FindSubredditThreadCli {
 	private SubredditThreadService subredditThreadService;
 	private HtmlUnitDriver driver;
 	private HashMap<String, List<SubredditThread>> subredditThreadsHash;
@@ -32,7 +32,7 @@ public class CliApplication {
 	 * Default constructor should instantiate all the attributes only one time per
 	 * instance
 	 */
-	public CliApplication() {
+	public FindSubredditThreadCli() {
 		super();
 		this.subredditThreadService = new SubredditThreadServiceImpl();
 		this.driver = new HtmlUnitDriver(BrowserVersion.CHROME);

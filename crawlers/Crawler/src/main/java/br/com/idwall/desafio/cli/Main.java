@@ -14,14 +14,17 @@ import br.com.idwall.desafio.utils.PropertiesUtil;
 public class Main {
 
 	public static void main(String[] args) {
-		FindSubredditThread cliApp = new IdwallFindSubredditThread();
+		FindSubredditThread app = new IdwallFindSubredditThread();
 		System.getProperty("file.encoding", "UTF-8");
 		if (args != null && args.length == 1) {
 
-			System.out.println("Initializing program...\n\n");
-			System.out.println(PropertiesUtil.getBundleMessage("cli_msg.before_process_info_message"));
-			// Give the results output
-			System.out.println(cliApp.getSubredditInfo(args[0].toString()));
+			if (args[0].trim().split(";").length > 1) {
+				System.out.println("Initializing program...\n\n");
+				System.out.println(PropertiesUtil.getBundleMessage("cli_msg.before_process_info_message"));
+
+				// Prints all the output info
+				System.out.println(app.getSubredditsInfos(args[0].trim().split(";")));
+			}
 
 		} else {
 
@@ -31,6 +34,7 @@ public class Main {
 		}
 
 		System.out.println(PropertiesUtil.getBundleMessage("cli_msg.after_process"));
+		app.endDriverSession();
 
 	}
 

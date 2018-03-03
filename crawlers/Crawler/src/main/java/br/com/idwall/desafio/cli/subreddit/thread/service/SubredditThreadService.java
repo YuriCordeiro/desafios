@@ -1,4 +1,4 @@
-package br.com.idwall.desafio.service;
+package br.com.idwall.desafio.cli.subreddit.thread.service;
 
 import org.openqa.selenium.WebElement;
 

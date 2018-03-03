@@ -11,9 +11,9 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 
+import br.com.idwall.desafio.cli.subreddit.thread.service.SubredditThreadService;
+import br.com.idwall.desafio.cli.subreddit.thread.service.impl.SubredditThreadServiceImpl;
 import br.com.idwall.desafio.model.SubredditThread;
-import br.com.idwall.desafio.service.SubredditThreadService;
-import br.com.idwall.desafio.service.impl.SubredditThreadServiceImpl;
 import br.com.idwall.desafio.utils.PropertiesUtil;
 
 public class FindSubredditThreadTelegram {

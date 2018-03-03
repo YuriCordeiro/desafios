@@ -21,18 +21,36 @@ import br.com.idwall.desafio.utils.PropertiesUtil;
 public class IdwallFindSubredditThread extends FindSubredditThread {
 
 	/**
-	 * Split the subreddits by ';', and find itself informations for each one
+	 * Find a single subreddit info</br>
+	 * It ever appends the StringBuilder using an empty map, reducing the final
+	 * StringBuilder length
 	 */
 	@Override
-	public String getSubredditInfo(String subreddits) {
+	public String getSubredditInfo(String subreddit) {
 
-		for (String subreddit : subreddits.split(";")) {
-			findWebSubredditThreadInformation(subreddit);
+		HashMap<String, List<SubredditThread>> singleSubredditHash = new HashMap<>();
+
+		findWebSubredditThreadInformation(subreddit, singleSubredditHash);
+
+		return printResults(singleSubredditHash);
+	}
+
+	/**
+	 * Find more than one subreddit info
+	 */
+	@Override
+	public String getSubredditsInfos(String[] subreddits) {
+
+		for (String subreddit : subreddits) {
+			findWebSubredditThreadInformation(subreddit, getThreadsHash());
 		}
 
-		getDriver().quit();
-
 		return printResults(getThreadsHash());
+	}
+
+	@Override
+	public void endDriverSession() {
+		getDriver().quit();
 	}
 
 	/**
@@ -49,7 +67,7 @@ public class IdwallFindSubredditThread extends FindSubredditThread {
 			// For each hasmap key (String)..
 			subredditThreadHash.entrySet().stream().forEach(entry -> {
 				sbThreadsResults.append("\n~~> Top threads for *" + entry.getKey().toUpperCase() + "* subreddit on "
-						+ PropertiesUtil.getBundleMessage("url.base_url").replace("/r", "") + "\n|");
+						+ PropertiesUtil.getBundleMessage("url.base_url").replace("/r", "").replace("www", "") + "\n|");
 
 				if (entry.getValue().size() > 0) {
 					// list all the values(List<SubredditThread>)
@@ -79,7 +97,13 @@ public class IdwallFindSubredditThread extends FindSubredditThread {
 	 *            like <b>cats</b>
 	 * @return a hash containing the subreddit keys, and a list of top threads
 	 */
-	public Map<String, List<SubredditThread>> findWebSubredditThreadInformation(String subreddit) {
+	public Map<String, List<SubredditThread>> findWebSubredditThreadInformation(String subreddit,
+			HashMap<String, List<SubredditThread>> threadsHash) {
+
+		// Will contain all threads found
+		List<SubredditThread> threadsList = new ArrayList<>();
+		// Will contain all the <div> elements with the class name 'thing'
+		List<WebElement> webElementsThreadsList = null;
 
 		try {
 			getDriver().get(PropertiesUtil.getBundleMessage("url.base_url").concat(subreddit)
@@ -87,9 +111,6 @@ public class IdwallFindSubredditThread extends FindSubredditThread {
 		} catch (Exception e) {
 			System.out.println("Url not found: " + e);
 		}
-
-		List<SubredditThread> threadsList = new ArrayList<>();
-		List<WebElement> webElementsThreadsList = null;
 
 		try {
 			webElementsThreadsList = getDriver().findElements(By.className("thing"));
@@ -112,12 +133,12 @@ public class IdwallFindSubredditThread extends FindSubredditThread {
 		});
 
 		if (threadsList.size() > 0) {
-			getThreadsHash().put(subreddit, threadsList);
+			threadsHash.put(subreddit, threadsList);
 		} else {
-			getThreadsHash().put(subreddit, new ArrayList<>());
+			threadsHash.put(subreddit, new ArrayList<>());
 		}
 
-		return getThreadsHash();
+		return threadsHash;
 	}
 
 }

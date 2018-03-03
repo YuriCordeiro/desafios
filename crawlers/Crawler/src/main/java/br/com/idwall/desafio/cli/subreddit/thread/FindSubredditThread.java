@@ -7,9 +7,9 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 
+import br.com.idwall.desafio.cli.subreddit.thread.service.SubredditThreadService;
+import br.com.idwall.desafio.cli.subreddit.thread.service.impl.SubredditThreadServiceImpl;
 import br.com.idwall.desafio.model.SubredditThread;
-import br.com.idwall.desafio.service.SubredditThreadService;
-import br.com.idwall.desafio.service.impl.SubredditThreadServiceImpl;
 
 /**
  * Abstract Class FindSubredditThread
@@ -31,13 +31,30 @@ public abstract class FindSubredditThread {
 	}
 
 	/**
-	 * Must return a String containing the whole threads top list of each subreddit
+	 * Must return a String containing the top threads list of each subreddit</br>
+	 * obs: it fits well with telegram application (because of message text max
+	 * length ).
 	 * 
-	 * @param subreddits
-	 *            subforum
+	 * @param subreddit
+	 *            a single sub-forum
 	 * @return a String containing the whole threads top list of each subreddit
 	 */
-	public abstract String getSubredditInfo(String subreddits);
+	public abstract String getSubredditInfo(String subreddit);
+
+	/**
+	 * Must return a String containing the top threads list of a subreddit</br>
+	 * obs: it works well in cli mode
+	 * 
+	 * @param subreddits
+	 *            more than one sub-forums
+	 * @return a String containing the whole threads top list of each subreddit
+	 */
+	public abstract String getSubredditsInfos(String[] subreddits);
+
+	/**
+	 * Ends driver session
+	 */
+	public abstract void endDriverSession();
 
 	public SubredditThreadService getSubredditThreadService() {
 		return subredditThreadService;

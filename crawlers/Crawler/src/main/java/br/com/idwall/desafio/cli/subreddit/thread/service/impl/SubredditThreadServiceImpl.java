@@ -1,10 +1,10 @@
-package br.com.idwall.desafio.service.impl;
+package br.com.idwall.desafio.cli.subreddit.thread.service.impl;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import br.com.idwall.desafio.cli.subreddit.thread.service.SubredditThreadService;
 import br.com.idwall.desafio.model.SubredditThread;
-import br.com.idwall.desafio.service.SubredditThreadService;
 
 /**
  * Implementation class of interface {@link SubredditThreadService}
@@ -46,32 +46,28 @@ public class SubredditThreadServiceImpl implements SubredditThreadService {
 
 	@Override
 	public int findThreadUpVoted(WebElement threadElement) {
-
 		try {
 			String upvotes = threadElement.findElement(By.className("midcol")).findElement(By.className("unvoted"))
 					.getAttribute("title").toString();
-			if (upvotes != null && upvotes.matches("[0-9].*")) {
-				return Integer.valueOf(upvotes);
-			}
+
+			return upvotes != null && upvotes.matches("[0-9].*") ? Integer.valueOf(upvotes) : 0;
+
 		} catch (Exception e) {
 			System.out.println("Midcol or Unvoted class not found:\n" + e);
 		}
-
 		return 0;
 	}
 
 	@Override
 	public boolean isPromotedThread(WebElement threadElement) {
-		WebElement flatListButtonsClass = getTopMatterWebElementClass(threadElement)
-				.findElement(By.className("flat-list"));
+
 		try {
-			if (flatListButtonsClass.findElement(By.className("promoted-tag")) != null)
-				return true;
-			else
-				return false;
-		} catch (Exception e) { // If findElementByClassName returns null, it isn't promoted
+			return getTopMatterWebElementClass(threadElement).findElement(By.className("flat-list"))
+					.findElement(By.className("promoted-tag")) != null ? true : false;
+		} catch (Exception e) {
 			return false;
 		}
+
 	}
 
 	@Override

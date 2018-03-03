@@ -1,8 +1,9 @@
-package br.com.idwall.desafio.cli;
+package br.com.idwall.desafio.cli.subreddit.thread;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,11 +41,12 @@ public class IdwallFindSubredditThreadTest {
 	 * on the properties file
 	 */
 	@Test
-	public void testFindSubredditThreadsInformations() {
+	public void testFindSubredditThreadInformation() {
 		System.out.println(
 				"\n\nRunning this test may prints some DefaultCssErrorHandler errors, but don't worry, everything's under control by here!\n\n");
 		IdwallFindSubredditThread cli = new IdwallFindSubredditThread();
-		Map<String, List<SubredditThread>> threadHash = cli.findWebSubredditThreadInformation("askreddit");
+		Map<String, List<SubredditThread>> threadHash = cli.findWebSubredditThreadInformation("askreddit",
+				new HashMap<>());
 		threadHash.entrySet().stream().forEach(entry -> entry.getValue().forEach(thread -> assertTrue(
 				thread.getUpVotes() >= Integer.valueOf(PropertiesUtil.getBundleMessage("param.minimum_upvotes")))));
 	}

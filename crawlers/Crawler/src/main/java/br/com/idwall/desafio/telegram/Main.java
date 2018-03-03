@@ -1,4 +1,4 @@
-package br.com.idwall.desafio.telegram.application;
+package br.com.idwall.desafio.telegram;
 
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;

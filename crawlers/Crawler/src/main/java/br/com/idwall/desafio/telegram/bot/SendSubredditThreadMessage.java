@@ -32,6 +32,10 @@ public class SendSubredditThreadMessage extends TelegramLongPollingBot {
 		StringBuilder sbBotMessage = new StringBuilder(); // It should contains all the messages for the user -> will be
 															// passed in <code>.setText<code> method of the
 															// <code>SendMessage</code> object
+		
+		if(isCommandMessage(receivedMessage)) {
+			
+		}
 
 		// If it's a command
 		if (isCommandMessage(receivedMessage)) {

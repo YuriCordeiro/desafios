@@ -9,7 +9,7 @@ import idwall.desafio.string.StringFormatter;
  * @author Yuri Cordeiro
  *
  */
-public class Main { // TODO: Create a README.MD to this project
+public class Main {
 
 	private static final String DEFAULT_INPUT_TEXT = "In the beginning God created the heavens and the earth. Now the earth was formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters.\n"
 			+ "\n"

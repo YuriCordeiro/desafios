@@ -8,27 +8,30 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import br.com.idwall.desafio.cli.subreddit.thread.FindSubredditThread;
+import br.com.idwall.desafio.cli.subreddit.thread.IdwallFindSubredditThread;
 import br.com.idwall.desafio.model.SubredditThread;
 import br.com.idwall.desafio.utils.PropertiesUtil;
 
 /**
- * Class responsible for {@link FindSubredditThreadCli} unit tests
+ * Class responsible for {@link IdwallFindSubredditThread} unit tests
  * 
  * @author YuriC
  *
  */
-public class CliApplicationTest {
+public class IdwallFindSubredditThreadTest {
 
 	/**
-	 * Testing the Default constructor
+	 * Testing the Default constructor</br>
+	 * Must instantiate the necessary attributes
 	 */
 	@Test
-	public void testCliApplication() {
-		FindSubredditThreadCli cli = new FindSubredditThreadCli();
+	public void testFindSubredditThread() {
+		FindSubredditThread cli = new IdwallFindSubredditThread();
 		assertNotNull(cli);
 		assertNotNull(cli.getDriver());
 		assertNotNull(cli.getSubredditThreadService());
-		assertNotNull(cli.getSubredditThreadsHash());
+		assertNotNull(cli.getThreadsHash());
 	}
 
 	/**
@@ -40,8 +43,8 @@ public class CliApplicationTest {
 	public void testFindSubredditThreadsInformations() {
 		System.out.println(
 				"\n\nRunning this test may prints some DefaultCssErrorHandler errors, but don't worry, everything's under control by here!\n\n");
-		FindSubredditThreadCli cli = new FindSubredditThreadCli();
-		Map<String, List<SubredditThread>> threadHash = cli.findSubredditThreadsInformations("askreddit");
+		IdwallFindSubredditThread cli = new IdwallFindSubredditThread();
+		Map<String, List<SubredditThread>> threadHash = cli.findWebSubredditThreadInformation("askreddit");
 		threadHash.entrySet().stream().forEach(entry -> entry.getValue().forEach(thread -> assertTrue(
 				thread.getUpVotes() >= Integer.valueOf(PropertiesUtil.getBundleMessage("param.minimum_upvotes")))));
 	}

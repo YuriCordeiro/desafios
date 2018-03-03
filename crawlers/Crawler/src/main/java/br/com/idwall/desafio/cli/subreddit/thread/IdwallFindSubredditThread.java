@@ -21,7 +21,7 @@ import br.com.idwall.desafio.utils.PropertiesUtil;
 public class IdwallFindSubredditThread extends FindSubredditThread {
 
 	/**
-	 * Split the subreddits by ';' and find itself informations
+	 * Split the subreddits by ';', and find itself informations for each one
 	 */
 	@Override
 	public String getSubredditInfo(String subreddits) {
@@ -35,19 +35,30 @@ public class IdwallFindSubredditThread extends FindSubredditThread {
 		return printResults(getThreadsHash());
 	}
 
+	/**
+	 * Build a StringBuilder object with all the subreddit's thread results
+	 * 
+	 * @param subredditThreadHash
+	 *            A hashmap containing subreddits(key) and threads list(value)
+	 * @return a String with all the subreddit's thread results
+	 */
 	private String printResults(HashMap<String, List<SubredditThread>> subredditThreadHash) {
 		StringBuilder sbThreadsResults = new StringBuilder();
 		if (subredditThreadHash.size() > 0) {
+
+			// For each hasmap key (String)..
 			subredditThreadHash.entrySet().stream().forEach(entry -> {
 				sbThreadsResults.append("\n~~> Top threads for *" + entry.getKey().toUpperCase() + "* subreddit on "
 						+ PropertiesUtil.getBundleMessage("url.base_url").replace("/r", "") + "\n|");
-				if (entry.getValue().size() > 0) {
 
+				if (entry.getValue().size() > 0) {
+					// list all the values(List<SubredditThread>)
 					entry.getValue().stream()
 							.forEach(threadObject -> sbThreadsResults.append("\n*Thread Title*: "
 									+ threadObject.getTitle() + "\n*Thread Upvotes*: " + threadObject.getUpVotes()
 									+ "\n*Thread Link*: [" + threadObject.getThreadLink() + "]" + "\n*Comments Link*: ["
 									+ threadObject.getCommentsLink() + "]\n\n"));
+
 				} else {
 					sbThreadsResults
 							.append("\n=== No threads with " + PropertiesUtil.getBundleMessage("param.minimum_upvotes")
@@ -87,8 +98,8 @@ public class IdwallFindSubredditThread extends FindSubredditThread {
 		}
 
 		webElementsThreadsList.stream().forEach(thingClassWebElement -> {
-			if (!getSubredditThreadService().isPromotedThread(thingClassWebElement)) { // We don't wanna promoted
-																						// threads
+			// Verify if it's a promoted thread, 'cuz we don't want to have it
+			if (!getSubredditThreadService().isPromotedThread(thingClassWebElement)) {
 
 				SubredditThread subredditThread = getSubredditThreadService()
 						.findSubredditThreadInformations(thingClassWebElement, subreddit);

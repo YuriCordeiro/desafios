@@ -20,7 +20,8 @@ public class Main {
 
 			System.out.println("Initializing program...\n\n");
 			System.out.println(PropertiesUtil.getBundleMessage("cli_msg.before_process_info_message"));
-			System.out.println(cliApp.getSubredditInfo(args[0].toString())); // provides the results output
+			// Give the results output
+			System.out.println(cliApp.getSubredditInfo(args[0].toString()));
 
 		} else {
 

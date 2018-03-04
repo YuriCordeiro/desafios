@@ -41,6 +41,13 @@ public class SubredditThread implements Serializable {
 		this.commentsLink = commentsLink;
 	}
 
+	/**
+	 * Default subreddit constructor
+	 */
+	public SubredditThread() {
+		super();
+	}
+
 	/////////////////////////////////
 	// Getters andSsetters
 	/////////////////////////////////

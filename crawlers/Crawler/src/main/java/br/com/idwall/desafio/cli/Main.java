@@ -23,6 +23,7 @@ public class Main {
 				System.out.println(PropertiesUtil.getBundleMessage("cli_msg.before_process_info_message"));
 
 				for (String subreddit : args[0].trim().split(";")) {
+					System.out.println("\nFinding for " + subreddit.toUpperCase() + " top threads info");
 					// Prints all the output infos
 					System.out.println(app.getSubredditInfo(subreddit));
 				}

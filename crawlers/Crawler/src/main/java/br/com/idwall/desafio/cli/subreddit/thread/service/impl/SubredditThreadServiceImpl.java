@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 
 import br.com.idwall.desafio.cli.subreddit.thread.service.SubredditThreadService;
 import br.com.idwall.desafio.model.SubredditThread;
+import br.com.idwall.desafio.utils.PropertiesUtil;
 
 /**
  * Implementation class of interface {@link SubredditThreadService}
@@ -16,8 +17,13 @@ public class SubredditThreadServiceImpl implements SubredditThreadService {
 
 	@Override
 	public SubredditThread findSubredditThreadInformations(WebElement threadElement, String subreddit) {
-		return new SubredditThread(subreddit, findThreadTitle(threadElement), findThreadUpVoted(threadElement),
-				findThreadLink(threadElement), findThreadCommentsLink(threadElement));
+		Integer upVotes = findThreadUpVotes(threadElement);
+		if (upVotes >= Integer.valueOf(PropertiesUtil.getBundleMessage("param.minimum_upvotes"))) {
+			return new SubredditThread(subreddit, findThreadTitle(threadElement), upVotes,
+					findThreadLink(threadElement), findThreadCommentsLink(threadElement));
+		} else {
+			return new SubredditThread();
+		}
 	}
 
 	@Override
@@ -45,7 +51,7 @@ public class SubredditThreadServiceImpl implements SubredditThreadService {
 	}
 
 	@Override
-	public int findThreadUpVoted(WebElement threadElement) {
+	public int findThreadUpVotes(WebElement threadElement) {
 		try {
 			String upvotes = threadElement.findElement(By.className("midcol")).findElement(By.className("unvoted"))
 					.getAttribute("title").toString();

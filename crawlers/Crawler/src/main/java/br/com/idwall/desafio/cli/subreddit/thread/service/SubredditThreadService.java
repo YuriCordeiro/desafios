@@ -40,7 +40,7 @@ public interface SubredditThreadService {
 	 *            The 'thing' class web element
 	 * @return upvotes of a thread
 	 */
-	public int findThreadUpVoted(WebElement threadElement);
+	public int findThreadUpVotes(WebElement threadElement);
 
 	/**
 	 * Returns if a thread is promoted or not

@@ -54,7 +54,8 @@ public class IdwallFindSubredditThread extends FindSubredditThread {
 			// For each hasmap key (String)..
 			subredditThreadHash.entrySet().stream().forEach(entry -> {
 				sbThreadsResults.append("\n~~> Top threads for *" + entry.getKey().toUpperCase() + "* subreddit on "
-						+ PropertiesUtil.getBundleMessage("url.base_url").replace("/r", "").replace("www.", "") + "\n|");
+						+ PropertiesUtil.getBundleMessage("url.base_url").replace("/r", "").replace("www.", "")
+						+ "\n|");
 
 				if (entry.getValue().size() > 0) {
 					// list all the values(List<SubredditThread>)
@@ -94,7 +95,8 @@ public class IdwallFindSubredditThread extends FindSubredditThread {
 
 		try {
 			getDriver().get(PropertiesUtil.getBundleMessage("url.base_url").concat(subreddit)
-					.concat(PropertiesUtil.getBundleMessage("url.top")).toString());
+					.concat(PropertiesUtil.getBundleMessage("url.top"))
+					.concat(PropertiesUtil.getBundleMessage("url.limit_param")));
 		} catch (Exception e) {
 			System.out.println("Url not found: " + e);
 		}
@@ -105,6 +107,10 @@ public class IdwallFindSubredditThread extends FindSubredditThread {
 			System.out.println(PropertiesUtil.getBundleMessage("cli_err.thing_class_not_found") + e);
 		}
 
+		System.out.println("\n(" + webElementsThreadsList.size() + ") " + subreddit
+				+ " threads were found. (If you want to filter more threads, go to the properties file and change the limit param of the url)");
+		System.out.println("Filtering them.. It may take some seconds(considering the url 'limit' param as 5)..\n");
+
 		webElementsThreadsList.stream().forEach(thingClassWebElement -> {
 			// Verify if it's a promoted thread, 'cuz we don't want to have it
 			if (!getSubredditThreadService().isPromotedThread(thingClassWebElement)) {
@@ -112,9 +118,11 @@ public class IdwallFindSubredditThread extends FindSubredditThread {
 				SubredditThread subredditThread = getSubredditThreadService()
 						.findSubredditThreadInformations(thingClassWebElement, subreddit);
 
-				if (subredditThread.getUpVotes() >= Integer
-						.valueOf(PropertiesUtil.getBundleMessage("param.minimum_upvotes"))) {
+				if (subredditThread.getUpVotes() != null) {
 					threadsList.add(subredditThread);
+					System.out.println("\nYeah! Now I got " + threadsList.size() + " top ratted thread(s).");
+				} else {
+					System.out.println("\nthread with no relevance..");
 				}
 			}
 		});

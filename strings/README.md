@@ -1,4 +1,4 @@
-﻿![alt tag](https://cdn.slidesharecdn.com/ss_thumbnails/18idwall1-170215065614-thumbnail-4.jpg?cb=1488322624)
+﻿![alt tag](https://developers.idwall.co/img/logo-idwall-developers-white.png)
 
 # Desafio No.1 (Strings) -- O Contexto
 Após ler o coding style do kernel Linux, você descobre a mágica que é 

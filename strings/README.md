@@ -1,4 +1,4 @@
-﻿![alt tag](https://ibb.co/cTC0Sn)
+﻿![alt tag](https://image.ibb.co/cxL9L7/oie_46110_KTed_V2_KJ.png)
 
 # Desafio No.1 (Strings) -- O Contexto
 Após ler o coding style do kernel Linux, você descobre a mágica que é 

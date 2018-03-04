@@ -25,10 +25,12 @@ Você deve seguir o exemplo de output [deste arquivo](https://github.com/idwall/
 O exemplo de output está [neste arquivo](https://github.com/idwall/desafios/blob/master/strings/output-parte2.txt), onde além de o arquivo possuir, no máximo, 40 caracteres por linha, o texto deve estar **justificado**.
 
 
+# Resolução
+
 ### "Building and running"
-Antes de rodar a aplicação, as dependências devem ser instaladas. Considerando que o Apache Maven já está instalado em seu ambiente, navegue até a pasta do projeto e digite:
+Antes de rodar a aplicação, as dependências devem ser instaladas. Considerando que o Apache Maven já está instalado em seu ambiente, navegue até a pasta RAIZ do projeto usando um terminal de sua preferência e digite:
     
-    mvn clean install
+    $ mvn clean install
 
 Para rodar a aplicação digite `java -jar   target/StringFormatter-1.0-SNAPSHOT.jar [Uma sentença qualquer] [Máximo de caracteres por linha] [Justify flag]`, onde:
 - [Uma sentença qualquer] = Uma sentença qualquer de sua preferência; _IMPORTANTE: Este parâmetro deve ser passado entre apóstrofes/aspas simples_.

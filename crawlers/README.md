@@ -1,8 +1,6 @@
-# Desafio 2: Crawlers
+![alt tag](https://image.ibb.co/cxL9L7/oie_46110_KTed_V2_KJ.png)
 
-Parte do trabalho na IDwall inclui desenvolver *crawlers/scrapers* para coletar dados de websites.
-Como nós nos divertimos trabalhando, às vezes trabalhamos para nos divertir!
-
+# Desafio No.2 (Crawler) -- O Contexto
 O Reddit é quase como um fórum com milhares de categorias diferentes. Com a sua conta, você pode navegar por assuntos técnicos, ver fotos de gatinhos, discutir questões de filosofia, aprender alguns life hacks e ficar por dentro das notícias do mundo todo!
 
 Subreddits são como fóruns dentro do Reddit e as postagens são chamadas *threads*.
@@ -16,7 +14,9 @@ Cada *thread* possui uma pontuação que, simplificando, aumenta com "up votes" 
 Sua missão é encontrar e listar as *threads* que estão bombando no Reddit naquele momento!
 Consideramos como bombando *threads* com 5000 pontos ou mais.
 
-## Entrada
+##Regras do desafio
+
+### Entrada
 - Lista com nomes de subreddits separados por ponto-e-vírgula (`;`). Ex: "askreddit;worldnews;cats"
 
 ### Parte 1
@@ -27,4 +27,16 @@ Essa parte pode ser um CLI simples, desde que a formatação da impressão fique
 Construir um robô que nos envie essa lista via Telegram sempre que receber o comando `/NadaPraFazer [+ Lista de subrredits]` (ex.: `/NadaPraFazer programming;dogs;brazil`)
 
 
-Qualquer método para coletar os dados é válido. Caso não saiba por onde começar, procure por SeleniumHQ (Java), PhantomJS (Javascript) e Scrapy (Python).
+#Resolução
+
+### "Building and running"
+Antes de rodar a aplicação, CASO queira rodar os testes da aplicação em seu terminal, as dependências do projeto devem ser baixadas antes. Considerando que o Apache Maven já está instalado em seu ambiente, navegue até a pasta RAIZ do projeto usando um terminal de sua preferência e digite:
+    
+    $ mvn clean install
+
+## 1- Aplicação CLI
+Para rodar a aplicação CLI basta estar na pasta RAIZ do projeto e executar o jar `CliApplication.jar` passando os parâmetros envoltos por aspas `(")` e separados por ponto-e-vírgula (`;`), como no exemplo a seguir:
+
+    $ java -jar CliApplication.jar "askreddit;worldnews;cats"
+    
+## 2- Aplicação Telegram-Bot

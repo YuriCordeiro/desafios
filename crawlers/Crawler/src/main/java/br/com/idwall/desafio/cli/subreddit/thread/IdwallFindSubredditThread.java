@@ -35,19 +35,6 @@ public class IdwallFindSubredditThread extends FindSubredditThread {
 		return printResults(singleSubredditHash);
 	}
 
-	/**
-	 * Find more than one subreddit info
-	 */
-	@Override
-	public String getSubredditsInfos(String[] subreddits) {
-
-		for (String subreddit : subreddits) {
-			findWebSubredditThreadInformation(subreddit, getThreadsHash());
-		}
-
-		return printResults(getThreadsHash());
-	}
-
 	@Override
 	public void endDriverSession() {
 		getDriver().quit();
@@ -67,7 +54,7 @@ public class IdwallFindSubredditThread extends FindSubredditThread {
 			// For each hasmap key (String)..
 			subredditThreadHash.entrySet().stream().forEach(entry -> {
 				sbThreadsResults.append("\n~~> Top threads for *" + entry.getKey().toUpperCase() + "* subreddit on "
-						+ PropertiesUtil.getBundleMessage("url.base_url").replace("/r", "").replace("www", "") + "\n|");
+						+ PropertiesUtil.getBundleMessage("url.base_url").replace("/r", "").replace("www.", "") + "\n|");
 
 				if (entry.getValue().size() > 0) {
 					// list all the values(List<SubredditThread>)

@@ -31,25 +31,13 @@ public abstract class FindSubredditThread {
 	}
 
 	/**
-	 * Must return a String containing the top threads list of each subreddit</br>
-	 * obs: it fits well with telegram application (because of message text max
-	 * length ).
+	 * Must return a String containing the top threads list of a subreddit</br>
 	 * 
 	 * @param subreddit
-	 *            a single sub-forum
-	 * @return a String containing the whole threads top list of each subreddit
+	 *            a single sub-forum name
+	 * @return a String containing the whole threads top list a subreddit
 	 */
 	public abstract String getSubredditInfo(String subreddit);
-
-	/**
-	 * Must return a String containing the top threads list of a subreddit</br>
-	 * obs: it works well in cli mode
-	 * 
-	 * @param subreddits
-	 *            more than one sub-forums
-	 * @return a String containing the whole threads top list of each subreddit
-	 */
-	public abstract String getSubredditsInfos(String[] subreddits);
 
 	/**
 	 * Ends driver session

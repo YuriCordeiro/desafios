@@ -1,4 +1,4 @@
-![alt tag](https://idwall.co/img/logo-idwall-black.png)
+﻿![alt tag](https://cdn.slidesharecdn.com/ss_thumbnails/18idwall1-170215065614-thumbnail-4.jpg?cb=1488322624)
 
 # Desafio No.1 (Strings) -- O Contexto
 Após ler o coding style do kernel Linux, você descobre a mágica que é 
@@ -24,18 +24,6 @@ Você deve seguir o exemplo de output [deste arquivo](https://github.com/idwall/
 ### Parte 2 (Intermediário) - limite 40 caracteres
 O exemplo de output está [neste arquivo](https://github.com/idwall/desafios/blob/master/strings/output-parte2.txt), onde além de o arquivo possuir, no máximo, 40 caracteres por linha, o texto deve estar **justificado**.
 
-
-## Pré-requisitos
-1- Possuir a última versão do [Java JDK](http://www.oracle.com/technetwork/pt/java/javase/downloads/)(1.8+) instalado no seu ambiente. Você pode verificar se o possui abrindo o seu terminal e digitando o seguinte comando:
-
-    $ java -version
-    
-Deverá te retornar algo assim: 
-
-    java version "1.8.0_161". 
-
-
-2- Possuir [Apache Maven](https://maven.apache.org) para baixar dependências, compilar, e rodar os testes da aplicação no seu terminal.
 
 ### "Building and running"
 Antes de rodar a aplicação, as dependências devem ser instaladas. Considerando que o Apache Maven já está instalado em seu ambiente, navegue até a pasta do projeto e digite:

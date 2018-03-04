@@ -1,22 +1,20 @@
-# Desafios IDwall
+﻿# Solução de Desafios
 
-Aqui estão os desafios para a primeira fase de testes de candidatos da IDwall.  
-Escolha em qual linguagem irá implementar (a não ser que um de nossos colaboradores lhe instrua a utilizar uma linguagem específica).  
+Aqui estão as soluções dos desafios para a primeira fase de testes de candidatos da IDwall.  
 
-Não há diferença de testes para diferentes níveis de profissionais, porém o teste será avaliado com diferentes critérios, dependendo do perfil da vaga.
-
-1. [Manipulação de strings](https://github.com/idwall/desafios/tree/master/strings)
+1. [Manipulação de strings](https://github.com/YuriCordeiro/desafios/tree/master/strings)
 2. [Crawlers](https://github.com/idwall/desafios/tree/master/crawlers)
 
-## Como entregar estes desafios
-Você deve forkar este projeto e fazer o *push* no seu próprio repositório e enviar o link para _jobs@idwall.co_ ou para o email do recrutador, junto com seu LinkedIn atualizado.  
+## Pré-requisitos
+1- Possuir a última versão do [Java JDK](http://www.oracle.com/technetwork/pt/java/javase/downloads/)(1.8+) instalado no seu ambiente. Você pode verificar se o possui abrindo o seu terminal e digitando o seguinte comando:
 
-A implementação deve ficar na pasta correspondente ao desafio. Fique à vontade para adicionar qualquer tipo de conteúdo que julgue útil ao projeto, alterar/acrescentar um README com instruções de como executá-lo, etc.
+    $ java -version
+    
+Deverá te retornar algo assim: 
 
-**Obs.:** Você não deve fazer um Pull Request para este projeto! 
+    java version "1.8.0_161". 
 
-## Carreira IDwall
 
-Caso queira mais detalhes de como trabalhamos, quais são nossos valores e ideais, confira a página [Carreira IDwall](https://idwall.co/carreira) e mesmo que seu perfil não esteja listado nas vagas em aberto, lhe encorajamos a mandar seu CV! Valorizamos bons profissionais sempre e gostamos de manter contato com gente boa.
+2- Possuir [Apache Maven](https://maven.apache.org) para baixar dependências, compilar, e rodar os testes da aplicação no seu terminal.
 
-Boas implementações! 🎉
+

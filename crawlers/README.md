@@ -14,7 +14,8 @@ Cada *thread* possui uma pontuação que, simplificando, aumenta com "up votes" 
 Sua missão é encontrar e listar as *threads* que estão bombando no Reddit naquele momento!
 Consideramos como bombando *threads* com 5000 pontos ou mais.
 
-##Regras do desafio
+
+## Regras do desafio
 
 ### Entrada
 - Lista com nomes de subreddits separados por ponto-e-vírgula (`;`). Ex: "askreddit;worldnews;cats"

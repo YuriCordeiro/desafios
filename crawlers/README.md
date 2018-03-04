@@ -28,7 +28,7 @@ Essa parte pode ser um CLI simples, desde que a formatação da impressão fique
 Construir um robô que nos envie essa lista via Telegram sempre que receber o comando `/NadaPraFazer [+ Lista de subrredits]` (ex.: `/NadaPraFazer programming;dogs;brazil`)
 
 
-#Resolução
+# Resolução
 
 ### "Building and running"
 Antes de rodar a aplicação, CASO queira rodar os testes da aplicação em seu terminal, as dependências do projeto devem ser baixadas antes. Considerando que o Apache Maven já está instalado em seu ambiente, navegue até a pasta RAIZ do projeto usando um terminal de sua preferência e digite:

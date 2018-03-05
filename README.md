@@ -10,11 +10,16 @@ Aqui estão as soluções dos desafios para a primeira fase de testes de candida
 
     $ java -version
     
-Deverá te retornar algo assim: 
+Caso já possua um JDK instalado em seu ambiente, deverá te retornar algo assim: 
 
     java version "1.8.0_161". 
 
 
-2- Possuir [Apache Maven](https://maven.apache.org) para baixar dependências, compilar, e rodar os testes da aplicação no seu terminal.
+2- Possuir necessariamente [Apache Maven](https://maven.apache.org) para baixar dependências, compilar os projetos, e rodar os testes da aplicação no seu terminal. Rode o comando seguinte no terminal para verificar a existência do Maven em seu ambiente:
 
+    $ mvn -v
+
+Caso esteja instalado, te retornará algo como:
+
+    Apache Maven 3.5.2 (138edd61fd100ec658bfa2d307c43b76940a5d7d; 2017-10-18T05:58:13-02:00)
 

@@ -1,4 +1,4 @@
-![alt tag](https://image.ibb.co/cxL9L7/oie_46110_KTed_V2_KJ.png)
+﻿![alt tag](https://image.ibb.co/cxL9L7/oie_46110_KTed_V2_KJ.png)
 
 # Desafio No.2 (Crawler) → O Contexto
 O Reddit é quase como um fórum com milhares de categorias diferentes. Com a sua conta, você pode navegar por assuntos técnicos, ver fotos de gatinhos, discutir questões de filosofia, aprender alguns life hacks e ficar por dentro das notícias do mundo todo!
@@ -34,7 +34,7 @@ Construir um robô que nos envie essa lista via Telegram sempre que receber o co
 ## 1- CrawlerCLI
 Para rodar o projeto CrawlerCLI basta estar na pasta RAIZ do projeto e executar o comando a seguir (lembre-se de passar os parâmetros envoltos por aspas `(")` e separados por ponto-e-vírgula (`;`) ):
 
-    $ java -jar target\CrawlerCLI-1.0.0-SNAPSHOT-jar-with-dependencies.jar "askreddit;worldnews;cats"
+    $ java -jar target/CrawlerCLI-1.0.0-SNAPSHOT-jar-with-dependencies.jar "askreddit;worldnews;cats"
 
     
 ## 2- CrawlerTelegramBot
@@ -58,7 +58,7 @@ Agora, dentro de seu terminal, estando na pasta RAIZ do projeto execute o comand
 
 Após terminar o build da aplicação e suas baixar dependências, um `jar-with-dependencies` será gerado na pasta `target` do projeto. Execute o jar como no comando a seguir e deixe o terminal aberto:
 
-    $ java -jar target\CrawlerTelegramBot-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+    $ java -jar target/CrawlerTelegramBot-1.0.0-SNAPSHOT-jar-with-dependencies.jar
     
 Se tudo der certo, a mensagem `System initialized successfully` deverá aparecer no seu terminal. Agora basta entrar no telegram e pesquisar pelo username do seu bot, assim como foi feito para o `@BotFather` (:
 

@@ -27,8 +27,11 @@ O exemplo de output está [neste arquivo](https://github.com/idwall/desafios/blo
 
 # "Building and Runnig"
 
+Antes de rodar o projeto StringFormatter, todas as classes devem ser compiladas e as dependências baixadas via Maven. Execute o seguinte comando dentro do terminal na pasta RAIZ do projeto:
 
-Para rodar a aplicação digite `java -jar   target/StringFormatter-1.0-SNAPSHOT.jar [Uma sentença qualquer] [Máximo de caracteres por linha] [Justify flag]`, onde:
+    $ mvn clean install
+    
+Após o término da instrução anterior, a pasta `target` contendo o `executable-jar` será gerada e a aplicação estará pronta para a execução. Ainda na pasta RAIZ do projeto, use o seguinte comando para executar o programa: `java -jar   target/StringFormatter-1.0-SNAPSHOT.jar [Uma sentença qualquer] [Máximo de caracteres por linha] [Justify flag]`, onde:
 - [Uma sentença qualquer] = Uma sentença qualquer de sua preferência; _IMPORTANTE: Este parâmetro deve ser passado entre apóstrofes/aspas simples_.
 - [Máximo de caracteres por linha] = Deverá ser um número;
 - [Justify flag] = Deverá ser _true_ ou _false_;

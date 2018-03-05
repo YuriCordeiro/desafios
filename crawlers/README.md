@@ -32,7 +32,11 @@ Construir um robô que nos envie essa lista via Telegram sempre que receber o co
 
 
 ## 1- CrawlerCLI
-Para rodar o projeto CrawlerCLI basta estar na pasta RAIZ do projeto e executar o comando a seguir (lembre-se de passar os parâmetros envoltos por aspas `(")` e separados por ponto-e-vírgula (`;`) ):
+Antes de rodar o projeto CrawlerCLI, todas as classes devem ser compiladas e as dependências baixadas via Maven. Execute o seguinte comando dentro do terminal na pasta RAIZ do projeto:
+
+    $ mvn clean install
+    
+Após o término da instrução anterior, a pasta `target` contendo o `executable-jar` será gerada e a aplicação estará pronta para a execução. Use o comando seguinte ainda na pasta RAIZ do projeto para executar o programa:
 
     $ java -jar target/CrawlerCLI-1.0.0-SNAPSHOT-jar-with-dependencies.jar "askreddit;worldnews;cats"
 
@@ -56,7 +60,7 @@ Agora, dentro de seu terminal, estando na pasta RAIZ do projeto execute o comand
 
     $ mvn clean install
 
-Após terminar o build da aplicação e suas baixar dependências, um `jar-with-dependencies` será gerado na pasta `target` do projeto. Execute o jar como no comando a seguir e deixe o terminal aberto:
+Após terminar o build da aplicação e todas as dependências terem sido baixadas, a pasta `target` contando o `jar-with-dependencies` será gerada. Execute o programa usando o comando a seguir e deixe o terminal seu aberto:
 
     $ java -jar target/CrawlerTelegramBot-1.0.0-SNAPSHOT-jar-with-dependencies.jar
     

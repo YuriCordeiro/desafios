@@ -1,9 +1,0 @@
-br\com\idwall\desafio\Main.class
-br\com\idwall\desafio\cli\subreddit\thread\FindSubredditThread.class
-br\com\idwall\desafio\bot\SendSubredditThreadMessage.class
-br\com\idwall\desafio\cli\subreddit\thread\IdwallFindSubredditThread.class
-br\com\idwall\desafio\cli\subreddit\thread\service\SubredditThreadService.class
-br\com\idwall\desafio\utils\PropertiesUtil.class
-br\com\idwall\desafio\enums\CommandEnum.class
-br\com\idwall\desafio\model\SubredditThread.class
-br\com\idwall\desafio\cli\subreddit\thread\service\impl\SubredditThreadServiceImpl.class

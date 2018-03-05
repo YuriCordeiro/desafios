@@ -50,7 +50,7 @@ Basta seguir as intruções que o `@BotFather` lhe dará para criar um bot com u
 
 ![alt tag](http://image.ibb.co/kqxdXn/botfather_token_message.png)
         
-Copie o token gerado, vá até a pasta [src/main/resources](github.com/idwall/desafios/tree/master/crawlertelegrambot/src/main/resources) do projeto, abra o arquivo `config.properties` e cole o token como valor da chave `bot.token`(primeira linha não comentada) e salve o arquivo. Deverá ficar desta forma: `bot.token=SUA-API-KEY`
+Copie o token gerado, vá até a pasta [src/main/resources](https://github.com/YuriCordeiro/desafios/tree/master/crawlers/CrawlerTelegramBot/src/main/resources) do projeto, abra o arquivo `config.properties` e cole o token como valor da chave `bot.token`(primeira linha não comentada) e salve o arquivo. Deverá ficar desta forma: `bot.token=SUA-API-KEY`
 
 Agora, dentro de seu terminal, estando na pasta RAIZ do projeto execute o comando:
 

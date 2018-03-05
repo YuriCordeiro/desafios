@@ -28,35 +28,49 @@ Essa parte pode ser um CLI simples, desde que a formatação da impressão fique
 Construir um robô que nos envie essa lista via Telegram sempre que receber o comando `/NadaPraFazer [+ Lista de subrredits]` (ex.: `/NadaPraFazer programming;dogs;brazil`)
 
 
-# Resolução
+# "Building and Runnig"
 
-### "Building and running"
-Antes de rodar a aplicação, CASO queira rodar os testes da aplicação em seu terminal, as dependências do projeto devem ser baixadas antes. Considerando que o Apache Maven já está instalado em seu ambiente, navegue até a pasta RAIZ do projeto usando um terminal de sua preferência e digite:
+
+## 1- CrawlerCLI
+Para rodar o projeto CrawlerCLI basta estar na pasta RAIZ do projeto e executar o comando a seguir (lembre-se de passar os parâmetros envoltos por aspas `(")` e separados por ponto-e-vírgula (`;`) ):
+
+    $ java -jar target\CrawlerCLI-1.0.0-SNAPSHOT-jar-with-dependencies.jar "askreddit;worldnews;cats"
+
     
-    $ mvn clean install
+## 2- CrawlerTelegramBot
+Para rodar a aplicação CrawlerTelegramBot você precisará ter um token. Para isso use o contato do [@BotFather](https://telegram.me/BotFather) no telegram para criar um novo bot e gerar o token necessário(usado para conectar-se à API do telegram). Caso o link não funcione, entre no telegram e procure pelo contato `@BotFather`.
 
-## 1- Aplicação CLI
-Para rodar a aplicação CLI basta estar na pasta RAIZ do projeto e executar o jar `CliApplication.jar` passando os parâmetros envoltos por aspas `(")` e separados por ponto-e-vírgula (`;`), como no exemplo a seguir:
+![alt tag](http://image.ibb.co/ccFU57/find_botfather_ANDROID.jpg)
 
-    $ java -jar CliApplication.jar "askreddit;worldnews;cats"
-    
-## 2- Aplicação Telegram-Bot
-Para rodar a aplicação Telegram-bot, usaremos primeiro o contato do [@BotFather](https://telegram.me/BotFather) no telegram para criar um novo bot e gerar um `HTTP-API-TOKEN`(o qual será usado para conectar-se à API do telegram). Caso o link não funcione, entre no telegram e procure pelo contato `@BotFather`.
-
-        IMAGEM VAI AQUI [FIND FOR @BOTFATHER]
-
-Após encontrar clique no botão Start e escreva no chat:
+Após o encontrar clique no botão Start e escreva no chat:
 
     /newbot
     
 Basta seguir as intruções que o `@BotFather` lhe dará para criar um bot com um nome e um username de sua preferência. Se tudo der certo, ao final você deverá receber uma mensagem como esta:
 
-        IMAGEM 2 VAI AQUI [BOT FATHER MESSAGE CONTAINING THE API-TOKEN]
+![alt tag](http://image.ibb.co/kqxdXn/botfather_token_message.png)
         
-Copie o token gerado, vá até a pasta [src/main/resources]() do projeto, abra o arquivo `config.properties` e cole o token como valor da chave `bot.token`(primeira linha não comentada). Deverá ficar desta forma: `bot.token=SUA-API-KEY`
+Copie o token gerado, vá até a pasta [src/main/resources](github.com/idwall/desafios/tree/master/crawlertelegrambot/src/main/resources) do projeto, abra o arquivo `config.properties` e cole o token como valor da chave `bot.token`(primeira linha não comentada) e salve o arquivo. Deverá ficar desta forma: `bot.token=SUA-API-KEY`
 
-Pronto! Você já pode rodar a aplicação usando o comando `java -jar TelegramBotApplication.jar`. Se tudo der certo, a mensagem `System initialized successfully` deverá aparecer no seu terminal. Agora basta entrar no telegram e pesquisar pelo username do seu bot, assim como foi feito para o `@BotFather`
+Agora, dentro de seu terminal, estando na pasta RAIZ do projeto execute o comando:
+
+    $ mvn clean install
+
+Após terminar o build da aplicação e suas baixar dependências, um `jar-with-dependencies` será gerado na pasta `target` do projeto. Execute o jar como no comando a seguir e deixe o terminal aberto:
+
+    $ java -jar target\CrawlerTelegramBot-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+    
+Se tudo der certo, a mensagem `System initialized successfully` deverá aparecer no seu terminal. Agora basta entrar no telegram e pesquisar pelo username do seu bot, assim como foi feito para o `@BotFather` (:
 
 Após pressionar o botão `start` na conversa com o seu bot, experimente passar o comando `/NadaPraFazer askreddit;cats;dogs`
 
-**Obs:** _Caso queira parametrizar alguma variável do sistema, como o **número mínimo de upvotes** para que uma thread seja considerada uma top thread, ou até mesmo a **quantidade de threads a serem exibidas na página** na hora da pesquisa, isso pode ser feito através do arquivo `properties.config`, bastando alterar os valores das chaves `param.minimum_upvotes` e `url.limit_param` (Pode ocasionar a alteração do tempo de resposta da aplicação)_
+**Obs:** _Caso queira parametrizar alguma variável do sistema, como o **número mínimo de upvotes** para que uma thread seja considerada uma top thread, ou até mesmo a **quantidade de threads a serem exibidas na página** na hora da pesquisa, isso pode ser feito através do arquivo `properties.config`, bastando alterar os valores das chaves `param.minimum_upvotes` e `url.limit_param` (Não se esqueça de executar o comando `mvn clean install` novamente, para que seja gerado um novo `jar-with-dependencies` contendo as suas alterações.)_
+
+# Built with
+
+- [Java 1.8](https://docs.oracle.com/javase/8/docs/api/)
+- [Apache Maven](http://maven.apache.org/guides/)
+- [Junit 4.12](https://github.com/junit-team/junit4)
+- [SeleniumHQ](https://github.com/SeleniumHQ)
+- [HtmlUnitDriver](https://github.com/SeleniumHQ/htmlunit-driver)
+- [Telegram Bots Api](https://core.telegram.org/bots/api)

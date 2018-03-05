@@ -37,9 +37,9 @@ Para rodar a aplicação digite `java -jar   target/StringFormatter-1.0-SNAPSHOT
 - [Máximo de caracteres por linha] = Deverá ser um número;
 - [Justify flag] = Deverá ser _true_ ou _false_;
 
-Você pode rodar o seguinte exemplo (o diretório indicado no seu terminal deverá estar como dentro da pasta raiz do projeto StringFormatter para funcionar):
+Você pode rodar o seguinte exemplo (o diretório indicado no seu terminal deverá estar como dentro da pasta RAIZ do projeto StringFormatter para funcionar):
 
-    $ java -jar StringFormatter-1.0-SNAPSHOT.jar 'In the beginning God created the heavens and the earth. Now the earth was formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters.`
+    $ java -jar target/StringFormatter-1.0-SNAPSHOT.jar 'In the beginning God created the heavens and the earth. Now the earth was formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters.`
     >
     > `And God said, "Let there be light," and there was light. God saw that the light was good, and he separated the light from the darkness. God called the light "day," and the darkness he called "night." And there was evening, and there was morning - the first day.' 30 false
     

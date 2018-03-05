@@ -1,6 +1,6 @@
 ﻿![alt tag](https://image.ibb.co/cxL9L7/oie_46110_KTed_V2_KJ.png)
 
-# Desafio No.1 (Strings) -- O Contexto
+# Desafio No.1 (Strings) → O Contexto
 Após ler o coding style do kernel Linux, você descobre a mágica que é 
 ter linhas de código com no máximo 80 caracteres cada uma.
 

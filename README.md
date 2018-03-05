@@ -3,7 +3,7 @@
 Aqui estão as soluções dos desafios para a primeira fase de testes de candidatos da IDwall.  
 
 1. [Manipulação de strings](https://github.com/YuriCordeiro/desafios/tree/master/strings)
-2. [Crawlers](https://github.com/idwall/desafios/tree/master/crawlers)
+2. [Crawlers](https://github.com/YuriCordeiro/desafios/tree/master/crawlers)
 
 ## Pré-requisitos
 1- Possuir a última versão do [Java JDK](http://www.oracle.com/technetwork/pt/java/javase/downloads/)(1.8+) instalado no seu ambiente. Você pode verificar se o possui abrindo o seu terminal e digitando o seguinte comando:

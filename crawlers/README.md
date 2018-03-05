@@ -1,6 +1,6 @@
 ![alt tag](https://image.ibb.co/cxL9L7/oie_46110_KTed_V2_KJ.png)
 
-# Desafio No.2 (Crawler) -- O Contexto
+# Desafio No.2 (Crawler) → O Contexto
 O Reddit é quase como um fórum com milhares de categorias diferentes. Com a sua conta, você pode navegar por assuntos técnicos, ver fotos de gatinhos, discutir questões de filosofia, aprender alguns life hacks e ficar por dentro das notícias do mundo todo!
 
 Subreddits são como fóruns dentro do Reddit e as postagens são chamadas *threads*.
@@ -41,3 +41,22 @@ Para rodar a aplicação CLI basta estar na pasta RAIZ do projeto e executar o j
     $ java -jar CliApplication.jar "askreddit;worldnews;cats"
     
 ## 2- Aplicação Telegram-Bot
+Para rodar a aplicação Telegram-bot, usaremos primeiro o contato do [@BotFather](https://telegram.me/BotFather) no telegram para criar um novo bot e gerar um `HTTP-API-TOKEN`(o qual será usado para conectar-se à API do telegram). Caso o link não funcione, entre no telegram e procure pelo contato `@BotFather`.
+
+        IMAGEM VAI AQUI [FIND FOR @BOTFATHER]
+
+Após encontrar clique no botão Start e escreva no chat:
+
+    /newbot
+    
+Basta seguir as intruções que o `@BotFather` lhe dará para criar um bot com um nome e um username de sua preferência. Se tudo der certo, ao final você deverá receber uma mensagem como esta:
+
+        IMAGEM 2 VAI AQUI [BOT FATHER MESSAGE CONTAINING THE API-TOKEN]
+        
+Copie o token gerado, vá até a pasta [src/main/resources]() do projeto, abra o arquivo `config.properties` e cole o token como valor da chave `bot.token`(primeira linha não comentada). Deverá ficar desta forma: `bot.token=SUA-API-KEY`
+
+Pronto! Você já pode rodar a aplicação usando o comando `java -jar TelegramBotApplication.jar`. Se tudo der certo, a mensagem `System initialized successfully` deverá aparecer no seu terminal. Agora basta entrar no telegram e pesquisar pelo username do seu bot, assim como foi feito para o `@BotFather`
+
+Após pressionar o botão `start` na conversa com o seu bot, experimente passar o comando `/NadaPraFazer askreddit;cats;dogs`
+
+**Obs:** _Caso queira parametrizar alguma variável do sistema, como o **número mínimo de upvotes** para que uma thread seja considerada uma top thread, ou até mesmo a **quantidade de threads a serem exibidas na página** na hora da pesquisa, isso pode ser feito através do arquivo `properties.config`, bastando alterar os valores das chaves `param.minimum_upvotes` e `url.limit_param` (Pode ocasionar a alteração do tempo de resposta da aplicação)_
